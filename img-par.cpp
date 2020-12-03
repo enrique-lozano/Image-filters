@@ -13,6 +13,7 @@ unsigned char * gauss(unsigned char * data, int width, int height){
     if (height==0 || width==0){
         cout << "Error, heigth or width of the image is 0";
     }
+    //int pad = width + (width%4);
     int mascara[5][5] = {{1,4,7,4,1},{4,16,26,16,4},{7,26,41,26,7},{4,16,26,16,4},{1,4,7,4,1}};
     #pragma omp parallel
     {
@@ -50,7 +51,10 @@ unsigned char * gauss(unsigned char * data, int width, int height){
             data[3 * (i * width + j) + 1] = (unsigned char) valueGreen;
             data[3 * (i * width + j) + 2] = (unsigned char) valueRed;
         }    
-    }}
+    }
+    
+    }//Pragma ends
+    
     return data;
 }
 
@@ -141,20 +145,31 @@ unsigned char* doOperation(string filename, string exitFile, string operation)
     int width = *(int*)&info[18];
     int height = *(int*)&info[22];
     int startInfo = *(int*)&info[10] - 54;
-    int pad = 4 - width%4;
+    int row_padded = (width*3 + 3) & (~3);
 
-    cout << "Bits sobrantes: " << startInfo << endl;
+    cout << "Width->" << width*3 << endl;
+    cout << "Width con padding->" << row_padded << endl;
+    cout << "Se han añadido: " << width%4 << endl;
 
     // allocate 3 bytes per pixel
-    int size = 3 * width * height;
-    unsigned char* data = new unsigned char[size];
-    unsigned char* dataUntilStart = new unsigned char[size]; 
+    int size = 3 * row_padded * height;
+    unsigned char* dataUntilStart = new unsigned char[startInfo]; 
+    unsigned char* dataRow = new unsigned char[row_padded]; //Contiene los colores de una sola fila
+    unsigned char* data = new unsigned char[size];          //Array de Colores-> Suma de todos los dataRow
 
     // Leemos la cadena situada continuación del header
     result = fread(dataUntilStart, sizeof(unsigned char), startInfo, f); // Bytes extra antes de llegar a la info de los colores
-    result = fread(data, sizeof(unsigned char), size, f);   // Data contiene los colores
-    if (result<=0){ 
-        cerr<<"Error in function fread"<<endl;
+    int contador = 0;
+    for (int i = 0; i < height; i++){
+        result = fread(dataRow, sizeof(unsigned char), row_padded, f);   
+        if (result<=0){ 
+            cerr<<"Error in function fread"<<endl;
+        }
+        for (int j=0; j< row_padded; j++){
+            data[contador] = dataRow[j];   // Data contiene los colores
+            contador++;
+        }
+
     }
 /*
     for (int i = 0; i < 200; i++)
@@ -187,7 +202,7 @@ unsigned char* doOperation(string filename, string exitFile, string operation)
     if(strcmp(operation.c_str(), "gauss")==0){
         auto t1_Gauss = clk::now();
         
-        data = gauss(data, width, height);
+        data = gauss(data, row_padded, height);
         
         auto t2_Gauss = clk::now();
         auto diff_Gauss = duration_cast<microseconds>(t2_Gauss - t1_Gauss);
@@ -197,7 +212,7 @@ unsigned char* doOperation(string filename, string exitFile, string operation)
     if(strcmp(operation.c_str(), "sobel")==0){
         auto t1_Gauss = clk::now();
         
-        data = gauss(data, width, height);
+        data = gauss(data, row_padded, height);
         
         auto t2_Gauss = clk::now();
         auto diff_Gauss = duration_cast<microseconds>(t2_Gauss - t1_Gauss);
@@ -205,7 +220,7 @@ unsigned char* doOperation(string filename, string exitFile, string operation)
         
         auto t1_Sobel = clk::now();
 
-        data = sobel(data, width, height);
+        data = sobel(data, row_padded, height);
         
         auto t2_Sobel = clk::now();
         auto diff_Sobel = duration_cast<microseconds>(t2_Sobel - t1_Sobel);
