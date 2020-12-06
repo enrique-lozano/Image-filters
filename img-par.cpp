@@ -127,40 +127,32 @@ void applyFilter(string inFile, string outFile, string operation){
             int m_x[3][3] = {{1,2,1},{0,0,0},{-1,-2,-1}};
             int m_y[3][3] = {{-1,0,1},{-2,0,2},{-1,0,1}};
 
-            int new_BlueX = 0, new_GreenX=0, new_RedX=0;
-            int new_BlueY = 0, new_GreenY=0, new_RedY=0;
+            int new_blueX = 0, new_greenX=0, new_redX=0;
+            int new_blueY = 0, new_greenY=0, new_redY=0;
 
-            for(int i=0; i<height; i++){
-                for(int j=0; j<width; j++){
+            for(int i=1; i<height+1; i++){
+                for(int j=1; j<width+1; j++){
                     for(int s=0; s<=2; s++){
                         for(int t=0; t<=2; t++){
-                            new_BlueX  +=  (m_x[s][t]) * (*(*(blue_array + i + s ) + (j+t)));
-                            new_GreenX +=  (m_x[s][t]) * (*(*(green_array + i + s ) + (j+t)));
-                            new_RedX   +=  (m_x[s][t]) * (*(*(red_array + i + s ) + (j+t)));
+                            new_blueX  +=  (m_x[s][t]) * (*(*(blue_array + i + s ) + (j+t)));
+                            new_greenX +=  (m_x[s][t]) * (*(*(green_array + i + s ) + (j+t)));
+                            new_redX   +=  (m_x[s][t]) * (*(*(red_array + i + s ) + (j+t)));
 
-                            new_BlueY  +=   (m_y[s][t]) * (*(*(blue_array + i + s ) + (j+t)));
-                            new_GreenY +=   (m_y[s][t]) * (*(*(green_array + i + s ) + (j+t)));
-                            new_RedY   +=   (m_y[s][t]) * (*(*(red_array + i + s ) + (j+t)));
+                            new_blueY  +=   (m_y[s][t]) * (*(*(blue_array + i + s ) + (j+t)));
+                            new_greenY +=   (m_y[s][t]) * (*(*(green_array + i + s ) + (j+t)));
+                            new_redY   +=   (m_y[s][t]) * (*(*(red_array + i + s ) + (j+t)));
                         }
                     }
-
-                    new_BlueX = new_BlueX / w;
-                    new_GreenX = new_GreenX / w;
-                    new_RedX = new_RedX/ w;
-
-                    new_BlueY = new_BlueY / w;
-                    new_GreenY = new_GreenY / w;
-                    new_RedY = new_RedY / w;
-
-                    int sumBlue = (abs(new_BlueX)+abs(new_BlueY)) / w;
-                    int sumGreen = (abs(new_GreenX)+abs(new_GreenY)) / w;
-                    int sumRed = (abs(new_RedX)+abs(new_RedY)) / w;
+                    
+                    int sumBlue = (abs(new_blueX)+abs(new_blueY)) / w;
+                    int sumGreen = (abs(new_greenX)+abs(new_greenY)) / w;
+                    int sumRed = (abs(new_redX)+abs(new_redY)) / w;
 
                     *(*(blue_array+i)+j) = (unsigned char) (sumBlue);
                     *(*(green_array+i)+j) = (unsigned char) (sumGreen);
                     *(*(red_array+i)+j) = (unsigned char) (sumRed);
-                    new_BlueX = new_GreenX = new_RedX = 0;
-                    new_BlueY = new_GreenY = new_RedY = 0;
+                    new_blueX = new_greenX = new_redX = 0;
+                    new_blueY = new_greenY = new_redY = 0;
                 }
             }
 
