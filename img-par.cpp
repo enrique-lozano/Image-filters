@@ -7,7 +7,7 @@
 using namespace std;
 using namespace std::chrono;
 using clk = chrono::high_resolution_clock;
-namespace fs = std::filesystem;
+namespace fs = std::filesystem; 
 
 void applyFilter(string inFile, string outFile, string operation){
     auto t1_Load = clk::now();
@@ -193,14 +193,12 @@ void applyFilter(string inFile, string outFile, string operation){
 
     header[6] = (uint32_t) 0;
 
-    //Inicio de datos de la imagen
+    //Write the new header
     header [10] = 54;
 
     header[14] = 40;
     header[15] = header[16] = header[17] = 0;
     header[11] = header[12] = header[13] = 0;
-
-    //Valores 2835
 
     header[38] =  19;
     header[39] =  11;
@@ -244,14 +242,14 @@ void applyFilter(string inFile, string outFile, string operation){
 
 
 int main(int nargs, char *args[]){
-    if(nargs != 4){ //Son necesarios 4 argumentos. P.ej.---> ./image-seq gauss indir outdir
+    if(nargs != 4){ // 4 arguments necessary. P.ej.---> ./image-seq gauss indir outdir
         cerr<<"Wrong format:"<<endl;
         cerr<<"image-seq operation in_path out_path;" <<endl;
         cerr<<"operation: copy, gauss, sobel"<<endl;
         return -1;
     }
 
-    //Direcciones
+    //Paths
     DIR *dir_in; dir_in = opendir(args[2]);   // pointer to input directory
     DIR *dir_out; dir_out = opendir(args[3]); //pointer to output directory
 
@@ -262,7 +260,7 @@ int main(int nargs, char *args[]){
         return -1;
     }
 
-    if(!dir_in){ //No existe directorio de entrada
+    if(!dir_in){
         cerr<<"Input path: " << args[2] <<endl;
         cerr<<"Output path: " << args[3] <<endl;
         cerr<<"Cannot open directory " <<args[2]<<endl;
@@ -271,7 +269,7 @@ int main(int nargs, char *args[]){
         return -1;
     }
 
-    if(!dir_out){ //No existe directorio de salida
+    if(!dir_out){
         cerr<<"Input path: " << args[2] <<endl;
         cerr<<"Output path: " << args[3] <<endl;
         cerr<<"Output directory " <<args[3] << " does not exist "<<endl;
