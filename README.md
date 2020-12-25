@@ -14,7 +14,7 @@ If no errors appear, you should see the images from the input directory in the o
 ## Posible filters📷
 At the moment, only one of the following filters can be used:
 - Copy:
-<img src="/Example_images/tiger.bmp" alt="Tiger image" width="50%" height="50%" />
+<img src="/Examples_images/tiger.bmp" alt="Tiger image" width="50%" height="50%" />
 - Gauss
 - Sobel
 
