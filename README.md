@@ -19,7 +19,7 @@ At the moment, only one of the following filters can be used:
 - **Gauss**: In image processing, a Gaussian blur (also known as Gaussian smoothing) is the result of blurring an image by a Gaussian function. [See wiki](https://en.wikipedia.org/wiki/Gaussian_blur)
 <img src="/Examples_images/Output_examples/tiger_gauss.bmp" alt="Tiger image" width="50%" height="50%" />
 
-- **Sobel**: The Sobel operator, sometimes called the Sobel–Feldman operator or Sobel filter, is used in image processing and computer vision, particularly within edge detection algorithms where it creates an image emphasising edges.
+- **Sobel**: The Sobel operator, sometimes called the Sobel–Feldman operator or Sobel filter, is used in image processing and computer vision, particularly within edge detection algorithms where it creates an image emphasising edges. [See wiki](https://en.wikipedia.org/wiki/Sobel_operator)
 <img src="/Examples_images/Output_examples/tiger_sobel.bmp" alt="Tiger image" width="50%" height="50%" />
 
 To use one of these filters, just replace the word "filter" of the command from the previous section with the word of the corresponding filter.
