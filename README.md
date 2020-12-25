@@ -7,11 +7,14 @@ Just clone the project using <code>git clone</code> in the directory where you w
 To run it you must have an input directory (the one we give as an example is valid) and an output directory (it can be the same as the input directory). Once this is cleared, simply type <code>make</code> in the terminal, in the root directory of the project. If there are no errors, continue entering the following command:
   > ./img-par filter input_directory output_directory
   
+If no errors appear, you should see the images from the input directory in the output directory, but with the specified filter applied.
+
 **Warning:** _This project is developed and thought to be compiled in a Linux environment. You must have the necessary environment to compile c ++ files (using the g ++ compiler). Other libraries may need installation, especially in case we want to work on windows_
 
 ## Posible filters📷
 At the moment, only one of the following filters can be used:
-- Copy
+- Copy:
+<img src="/Example_images/tiger.bmp" alt="Tiger image" width="50%" height="50%" />
 - Gauss
 - Sobel
 
