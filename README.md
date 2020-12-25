@@ -14,10 +14,12 @@ If no errors appear, you should see the images from the input directory in the o
 ## Posible filters📷
 At the moment, only one of the following filters can be used:
 - **Copy**: The equivalent of not using any filter. The files will simply be copied from the input directory to the output directory. For example, when copying the following image of the tiger, we will obtain:
-<img src="/Examples_images/Output_examples/tiger_gauss.bmp" alt="Tiger image" width="50%" height="50%" />
+<img src="/Examples_images/tiger.bmp" alt="Tiger image" width="50%" height="50%" />
 - **Gauss**: In image processing, a Gaussian blur (also known as Gaussian smoothing) is the result of blurring an image by a Gaussian function. 
-<img src="/Examples_images/Output_examples/tiger_sobel.bmp" alt="Tiger image" width="50%" height="50%" />
+<img src="/Examples_images/Output_examples/tiger_gauss.bmp" alt="Tiger image" width="50%" height="50%" />
+
 - **Sobel**: The Sobel operator, sometimes called the Sobel–Feldman operator or Sobel filter, is used in image processing and computer vision, particularly within edge detection algorithms where it creates an image emphasising edges.
+<img src="/Examples_images/Output_examples/tiger_sobel.bmp" alt="Tiger image" width="50%" height="50%" />
 
 To use one of these filters, just replace the word "filter" of the command from the previous section with the word of the corresponding filter.
 
