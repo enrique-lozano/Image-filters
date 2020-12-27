@@ -9,7 +9,7 @@ To run it you must have an input directory (the one we give as an example is val
   
 If no errors appear, you should see the images from the input directory in the output directory, but with the specified filter applied.
 
-**Warning:** _This project is developed and thought to be compiled in a Linux environment. You must have the necessary environment to compile c ++ files (using the g ++ compiler). Other libraries may need installation, especially in case we want to work on windows_
+**Warning:** _This project is developed and thought to be compiled in a Linux environment. You must have the necessary environment to compile c++ files (using the g++ compiler). Other libraries may need installation, especially in case we want to work on windows_
 
 ## Posible filters📷
 At the moment, only one of the following filters can be used:
